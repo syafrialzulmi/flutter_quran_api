@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../widgets/juz.dart';
+import '../widgets/surah.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -21,8 +24,6 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHome extends StatelessWidget {
-  const MyHome({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -146,7 +147,48 @@ class MyHome extends StatelessWidget {
                     ),
                   ],
                 ),
-              )
+              ),
+              Container(
+                padding: EdgeInsets.only(top: 15),
+                child: DefaultTabController(
+                  length: 2, // length of tabs
+                  initialIndex: 0,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      Container(
+                        child: TabBar(
+                          indicator: UnderlineTabIndicator(
+                              borderSide: BorderSide(
+                                  width: 5.0, color: Color(0xffA44AFF))),
+                          labelColor: Colors.white,
+                          unselectedLabelColor: Color(0xffABAFD7),
+                          labelStyle: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          tabs: [
+                            Tab(text: 'Surah'),
+                            Tab(text: 'Juz'),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        height: 400, //height of TabBarView
+                        decoration: BoxDecoration(
+                            // color: Colors.white,
+                            border: Border(
+                                top: BorderSide(
+                                    color: Color(0xffA44AFF), width: 0.5))),
+                        child: TabBarView(
+                          children: <Widget>[Surah(), Juz()],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
         ),
