@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
-import '../widgets/juz.dart';
-import '../widgets/surah.dart';
+import 'models/surah_model.dart';
+import 'repository/repository.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,16 +13,37 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Quran API',
       debugShowCheckedModeBanner: false,
-      home: MyHome(),
       theme: ThemeData(
         scaffoldBackgroundColor: Color(0xff283663),
       ),
+      home: MyHome(),
     );
   }
 }
 
-class MyHome extends StatelessWidget {
+class MyHome extends StatefulWidget {
+  const MyHome({Key? key}) : super(key: key);
+
+  @override
+  State<MyHome> createState() => _MyHomeState();
+}
+
+class _MyHomeState extends State<MyHome> {
+  List<SurahModel> listSurah = [];
+  Repository repository = Repository();
+
+  getData() async {
+    listSurah = await repository.getData();
+    setState(() {});
+  }
+
+  void initState() {
+    getData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,14 +78,14 @@ class MyHome extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
+            children: [
               Text(
                 'Asslamualaikum',
                 style: TextStyle(
                   fontFamily: 'Poppins',
                   fontSize: 18,
                   fontWeight: FontWeight.w500,
-                  color: Colors.white,
+                  color: Color(0xff7B80AD),
                 ),
               ),
               Text(
@@ -182,7 +202,25 @@ class MyHome extends StatelessWidget {
                                 top: BorderSide(
                                     color: Color(0xffA44AFF), width: 0.5))),
                         child: TabBarView(
-                          children: <Widget>[Surah(), Juz()],
+                          children: <Widget>[
+                            ListView.separated(
+                                itemBuilder: (context, index) {
+                                  return SurahItem(
+                                    listSurah[index].nomor,
+                                    listSurah[index].nama,
+                                    listSurah[index].nama_latin,
+                                    listSurah[index].jumlah_ayat,
+                                    listSurah[index].tempat_turun,
+                                  );
+                                },
+                                separatorBuilder: (context, index) {
+                                  return Divider(
+                                    color: Color(0xff7B80AD),
+                                  );
+                                },
+                                itemCount: listSurah.length),
+                            Text('data 2'),
+                          ],
                         ),
                       ),
                     ],
@@ -190,6 +228,143 @@ class MyHome extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+        ),
+      ),
+      extendBody: true,
+      bottomNavigationBar: ClipRRect(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(30.0),
+          topRight: Radius.circular(30.0),
+        ),
+        child: BottomNavigationBar(
+          backgroundColor: Color(0xff283663),
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          unselectedItemColor: Colors.grey,
+          selectedItemColor: Colors.green,
+          items: [
+            BottomNavigationBarItem(
+              label: 'Icon',
+              icon: Container(
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Color(0xff16254E),
+                ),
+                child: SvgPicture.asset('assets/icons/icon_1.svg'),
+              ),
+            ),
+            BottomNavigationBarItem(
+              label: 'Icon',
+              icon: Container(
+                padding: EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Color(0xffA44AFF),
+                ),
+                child: SvgPicture.asset('assets/icons/icon_2.svg'),
+              ),
+            ),
+            BottomNavigationBarItem(
+              label: 'Icon',
+              icon: Container(
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Color(0xff16254E),
+                ),
+                child: SvgPicture.asset('assets/icons/icon_3.svg'),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class SurahItem extends StatelessWidget {
+  final int nomorSurah;
+  final String nama;
+  final String nama_latin;
+  final int jumlah_ayat;
+  final String tempat_turun;
+
+  SurahItem(this.nomorSurah, this.nama, this.nama_latin, this.jumlah_ayat,
+      this.tempat_turun);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: ListTile(
+        leading: Container(
+          height: 40,
+          width: 40,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Container(
+                  height: 40,
+                  width: 40,
+                  child: SvgPicture.asset('assets/icons/banner_ayat.svg')),
+              Text(
+                nomorSurah.toString(),
+                style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
+              )
+            ],
+          ),
+        ),
+        title: Text(
+          nama_latin,
+          style: TextStyle(
+              fontFamily: 'Poppins',
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Colors.white),
+        ),
+        subtitle: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              tempat_turun.toUpperCase(),
+              style: TextStyle(
+                  fontFamily: 'Poppins',
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xff7B80AD)),
+            ),
+            SizedBox(
+              width: 5,
+            ),
+            Icon(
+              Icons.circle,
+              color: Color(0xff7B80AD),
+              size: 8,
+            ),
+            SizedBox(
+              width: 5,
+            ),
+            Text(
+              jumlah_ayat.toString() + ' ayat'.toUpperCase(),
+              style: TextStyle(
+                  fontFamily: 'Poppins',
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xff7B80AD)),
+            ),
+          ],
+        ),
+        trailing: Text(
+          nama,
+          style: TextStyle(
+            fontFamily: 'Amiri',
+            fontSize: 20,
+            color: Color(0xffA44AFF),
           ),
         ),
       ),
