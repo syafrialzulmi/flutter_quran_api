@@ -1,8 +1,11 @@
 class SurahModel {
   final int nomor;
   final String nama;
+  // ignore: non_constant_identifier_names
   final String nama_latin;
+  // ignore: non_constant_identifier_names
   final int jumlah_ayat;
+  // ignore: non_constant_identifier_names
   final String tempat_turun;
   final String arti;
   final String deskripsi;
@@ -11,8 +14,11 @@ class SurahModel {
   SurahModel({
     required this.nomor,
     required this.nama,
+    // ignore: non_constant_identifier_names
     required this.nama_latin,
+    // ignore: non_constant_identifier_names
     required this.jumlah_ayat,
+    // ignore: non_constant_identifier_names
     required this.tempat_turun,
     required this.arti,
     required this.deskripsi,
