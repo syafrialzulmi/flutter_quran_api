@@ -16,9 +16,9 @@ class MyApp extends StatelessWidget {
       title: 'Quran API',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        scaffoldBackgroundColor: Color(0xff283663),
+        scaffoldBackgroundColor: const Color(0xff283663),
       ),
-      home: MyHome(),
+      home: const MyHome(),
     );
   }
 }
@@ -39,6 +39,7 @@ class _MyHomeState extends State<MyHome> {
     setState(() {});
   }
 
+  @override
   void initState() {
     getData();
     super.initState();
@@ -48,16 +49,16 @@ class _MyHomeState extends State<MyHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xff283663),
+        backgroundColor: const Color(0xff283663),
         elevation: 0,
         centerTitle: false,
         leading: IconButton(
           onPressed: () {},
-          icon: Icon(
+          icon: const Icon(
             Icons.menu,
           ),
         ),
-        title: Text(
+        title: const Text(
           'Quran App',
           style: TextStyle(
             fontFamily: 'Poppins',
@@ -69,17 +70,17 @@ class _MyHomeState extends State<MyHome> {
         actions: <Widget>[
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
           ),
         ],
       ),
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Asslamualaikum',
                 style: TextStyle(
                   fontFamily: 'Poppins',
@@ -88,7 +89,7 @@ class _MyHomeState extends State<MyHome> {
                   color: Color(0xff7B80AD),
                 ),
               ),
-              Text(
+              const Text(
                 'Tanvir Ahassan',
                 style: TextStyle(
                   fontFamily: 'Poppins',
@@ -98,13 +99,14 @@ class _MyHomeState extends State<MyHome> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 20),
+                margin: const EdgeInsets.only(top: 20),
                 height: 130,
                 width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
+                    // ignore: prefer_const_literals_to_create_immutables
                     colors: [
                       Color(0xffDF98FA),
                       Color(0xff9055FF),
@@ -123,9 +125,10 @@ class _MyHomeState extends State<MyHome> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Row(
+                            // ignore: prefer_const_literals_to_create_immutables
                             children: <Widget>[
-                              Icon(Icons.menu_book, color: Colors.white),
-                              Text(
+                              const Icon(Icons.menu_book, color: Colors.white),
+                              const Text(
                                 ' Last Read',
                                 style: TextStyle(
                                   fontFamily: 'Poppins',
@@ -136,7 +139,7 @@ class _MyHomeState extends State<MyHome> {
                               )
                             ],
                           ),
-                          Text(
+                          const Text(
                             'Al-Fatiah',
                             style: TextStyle(
                               fontFamily: 'Poppins',
@@ -145,7 +148,7 @@ class _MyHomeState extends State<MyHome> {
                               color: Colors.white,
                             ),
                           ),
-                          Text(
+                          const Text(
                             'Ayah No: 1',
                             style: TextStyle(
                               fontFamily: 'Poppins',
@@ -169,34 +172,33 @@ class _MyHomeState extends State<MyHome> {
                 ),
               ),
               Container(
-                padding: EdgeInsets.only(top: 15),
+                padding: const EdgeInsets.only(top: 15),
                 child: DefaultTabController(
                   length: 2, // length of tabs
                   initialIndex: 0,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                      Container(
-                        child: TabBar(
-                          indicator: UnderlineTabIndicator(
-                              borderSide: BorderSide(
-                                  width: 5.0, color: Color(0xffA44AFF))),
-                          labelColor: Colors.white,
-                          unselectedLabelColor: Color(0xffABAFD7),
-                          labelStyle: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          tabs: [
-                            Tab(text: 'Surah'),
-                            Tab(text: 'Juz'),
-                          ],
+                      const TabBar(
+                        indicator: UnderlineTabIndicator(
+                            borderSide: BorderSide(
+                                width: 5.0, color: Color(0xffA44AFF))),
+                        labelColor: Colors.white,
+                        unselectedLabelColor: Color(0xffABAFD7),
+                        labelStyle: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
                         ),
+                        // ignore: prefer_const_literals_to_create_immutables
+                        tabs: [
+                          Tab(text: 'Surah'),
+                          Tab(text: 'Juz'),
+                        ],
                       ),
                       Container(
                         height: 400, //height of TabBarView
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             // color: Colors.white,
                             border: Border(
                                 top: BorderSide(
@@ -214,12 +216,12 @@ class _MyHomeState extends State<MyHome> {
                                   );
                                 },
                                 separatorBuilder: (context, index) {
-                                  return Divider(
+                                  return const Divider(
                                     color: Color(0xff7B80AD),
                                   );
                                 },
                                 itemCount: listSurah.length),
-                            Text('data 2'),
+                            const Text('data 2'),
                           ],
                         ),
                       ),
@@ -233,12 +235,12 @@ class _MyHomeState extends State<MyHome> {
       ),
       extendBody: true,
       bottomNavigationBar: ClipRRect(
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(30.0),
           topRight: Radius.circular(30.0),
         ),
         child: BottomNavigationBar(
-          backgroundColor: Color(0xff283663),
+          backgroundColor: const Color(0xff283663),
           showSelectedLabels: false,
           showUnselectedLabels: false,
           unselectedItemColor: Colors.grey,
@@ -247,8 +249,8 @@ class _MyHomeState extends State<MyHome> {
             BottomNavigationBarItem(
               label: 'Icon',
               icon: Container(
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
+                padding: const EdgeInsets.all(10),
+                decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   color: Color(0xff16254E),
                 ),
@@ -258,8 +260,8 @@ class _MyHomeState extends State<MyHome> {
             BottomNavigationBarItem(
               label: 'Icon',
               icon: Container(
-                padding: EdgeInsets.all(15),
-                decoration: BoxDecoration(
+                padding: const EdgeInsets.all(15),
+                decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   color: Color(0xffA44AFF),
                 ),
@@ -269,8 +271,8 @@ class _MyHomeState extends State<MyHome> {
             BottomNavigationBarItem(
               label: 'Icon',
               icon: Container(
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
+                padding: const EdgeInsets.all(10),
+                decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   color: Color(0xff16254E),
                 ),
@@ -287,85 +289,87 @@ class _MyHomeState extends State<MyHome> {
 class SurahItem extends StatelessWidget {
   final int nomorSurah;
   final String nama;
+  // ignore: non_constant_identifier_names
   final String nama_latin;
+  // ignore: non_constant_identifier_names
   final int jumlah_ayat;
+  // ignore: non_constant_identifier_names
   final String tempat_turun;
 
-  SurahItem(this.nomorSurah, this.nama, this.nama_latin, this.jumlah_ayat,
+  // ignore: use_key_in_widget_constructors
+  const SurahItem(this.nomorSurah, this.nama, this.nama_latin, this.jumlah_ayat,
       this.tempat_turun);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: ListTile(
-        leading: Container(
-          height: 40,
-          width: 40,
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Container(
-                  height: 40,
-                  width: 40,
-                  child: SvgPicture.asset('assets/icons/banner_ayat.svg')),
-              Text(
-                nomorSurah.toString(),
-                style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white),
-              )
-            ],
-          ),
-        ),
-        title: Text(
-          nama_latin,
-          style: TextStyle(
-              fontFamily: 'Poppins',
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Colors.white),
-        ),
-        subtitle: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              tempat_turun.toUpperCase(),
-              style: TextStyle(
-                  fontFamily: 'Poppins',
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xff7B80AD)),
-            ),
+    return ListTile(
+      leading: SizedBox(
+        height: 40,
+        width: 40,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
             SizedBox(
-              width: 5,
-            ),
-            Icon(
-              Icons.circle,
-              color: Color(0xff7B80AD),
-              size: 8,
-            ),
-            SizedBox(
-              width: 5,
-            ),
+                height: 40,
+                width: 40,
+                child: SvgPicture.asset('assets/icons/banner_ayat.svg')),
             Text(
-              jumlah_ayat.toString() + ' ayat'.toUpperCase(),
-              style: TextStyle(
+              nomorSurah.toString(),
+              style: const TextStyle(
                   fontFamily: 'Poppins',
-                  fontSize: 12,
+                  fontSize: 14,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xff7B80AD)),
-            ),
+                  color: Colors.white),
+            )
           ],
         ),
-        trailing: Text(
-          nama,
-          style: TextStyle(
-            fontFamily: 'Amiri',
-            fontSize: 20,
-            color: Color(0xffA44AFF),
+      ),
+      title: Text(
+        nama_latin,
+        style: const TextStyle(
+            fontFamily: 'Poppins',
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: Colors.white),
+      ),
+      subtitle: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            tempat_turun.toUpperCase(),
+            style: const TextStyle(
+                fontFamily: 'Poppins',
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+                color: Color(0xff7B80AD)),
           ),
+          const SizedBox(
+            width: 5,
+          ),
+          const Icon(
+            Icons.circle,
+            color: Color(0xff7B80AD),
+            size: 8,
+          ),
+          const SizedBox(
+            width: 5,
+          ),
+          Text(
+            jumlah_ayat.toString() + ' ayat'.toUpperCase(),
+            style: const TextStyle(
+                fontFamily: 'Poppins',
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+                color: Color(0xff7B80AD)),
+          ),
+        ],
+      ),
+      trailing: Text(
+        nama,
+        style: const TextStyle(
+          fontFamily: 'Amiri',
+          fontSize: 20,
+          color: Color(0xffA44AFF),
         ),
       ),
     );
